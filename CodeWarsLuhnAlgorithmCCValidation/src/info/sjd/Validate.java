@@ -3,27 +3,26 @@ package info.sjd;
 public class Validate {
 	public static boolean validate(String n) {
 		int finalSumOfDigits = 0;
-		int[] intArray = new int[n.length()];
+		boolean toggle = false;
 		for (int i = n.length() - 1; i >= 0; i--) {
-			intArray[i] = Integer.valueOf(n.charAt(i));
-			if (i % 2 == 0) {
-				intArray[i] = intArray[i] * 2;
-				if (intArray[i] > 9) {
-					intArray[i] = intArray[i] - 9;
+			int number = Integer.valueOf(n.substring(i, i + 1));
+			if (toggle) {
+				number *= 2;
+				if (number > 9) {
+					number -= 9;
 				}
 			}
 			
-			finalSumOfDigits = finalSumOfDigits + intArray[i];
+			finalSumOfDigits += number;
+			toggle = !toggle;
+
 		}
-		if (finalSumOfDigits % 10 == 0) {
-			return true;
-		} else {
-			return false;		
-		}
+		return (finalSumOfDigits % 10 == 0); 
+		
 	}
 	
 	public static void main(String[] args) {
-		String n = "891";
+		String n = "4561261212345467";
 		System.out.println(validate(n));
 	}
 
